@@ -4,69 +4,102 @@
 
 using namespace std;
 
-int main(int argc, char *argv[]){
-    string input = argv[1];
-    stack<char> parenthesis, angle, curly, square;
-    
-    bool failed;
-    while (!failed){
-            for (char& groupChar : input){
-            switch(groupChar){
+stack<char> characters;
+bool balance = true;
 
-                case ('('): {
-                    parenthesis.push(groupChar);
-                }
-                case ('<'): {
-                    angle.push(groupChar);
-                }
-                case ('{'): {
-                    curly.push(groupChar);
-                }
-                case ('['): {
-                    square.push(groupChar);
-                }
-                case (')'): {
-                    if (!parenthesis.empty()){
-                        parenthesis.pop();
-                    }
-                    else {
-                        failed = true;
-                    };
-                }
-                case ('>'): {
-                    if (!angle.empty()){
-                        angle.pop();
-                    }
-                    else {
-                        failed = true;
-                    };
-                }
-                case ('}'): {
-                    if (!curly.empty()){
-                        curly.pop();
-                    }
-                    else {
-                        failed = true;
-                    };
-                }
-                case (']'): {
-                    if (!square.empty()){
-                        square.pop();
-                    }
-                    else {
-                        failed = true;
-                    };
-                }
-                default: {
-                    cerr << "unknown input" << endl;
-                }
+bool calc(char query){
+    if (!characters.empty()){
+        while (!characters.empty() && balance != false){
+            if (characters.top() == query){
+                characters.pop();
+                return true;
+            }
+            else {
+                return false;
             }
         }
     }
-    if (!failed){
+    return false;  
+}
+
+int main(int argc, char *argv[])
+{
+    string input = argv[1];
+    int bracketCount = 0;
+
+    for (char &groupChar : input){
+        switch(groupChar){
+
+            case '(':{
+                bracketCount++;
+                cout << "found a ( " << endl;
+                characters.push(groupChar);
+                break;
+            }
+
+            case '<':{
+                bracketCount++;
+                cout << "found a < " << endl;
+                characters.push(groupChar);
+                break;
+            }
+            
+            case '{':{
+                bracketCount++;
+                cout << "found a { " << endl;
+                characters.push(groupChar);
+                break;
+            }
+
+            case '[':{
+                bracketCount++;
+                cout << "found a [ " << endl;
+                characters.push(groupChar);
+                break;
+            }
+
+            case ')':{
+                bracketCount++;
+                cout << "found a ) " << endl;
+                balance = calc('(');
+                break;
+            }
+
+            case '>':{
+                bracketCount++;
+                cout << "found a > " << endl;
+                balance = calc('<');
+                break;
+            }
+
+            case '}':{
+                bracketCount++;
+                cout << "found a } " << endl;
+                balance = calc('{');
+                break;
+                
+            }
+
+            case ']':{
+                bracketCount++;
+                cout << "found a ] " << endl;
+                balance = calc('[');
+                break;
+            }
+            default:{
+                break;
+            }
+        }
+    }
+    if (bracketCount == 0)
+    {
+        cout << "ERROR: No Bracket Characters Found! (try entering (),{},[], or <>)" << endl;
+    }
+    else if(balance && characters.empty()){
         cout << "true" << endl;
     }
-    else {
+    else
+    {
         cout << "false" << endl;
-    }   
+    }
 }
