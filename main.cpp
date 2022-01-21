@@ -25,7 +25,7 @@ bool calc(char query){
 int main(int argc, char *argv[])
 {
     string input = argv[1];
-    int bracketCount = 0;
+    int nonBracketCount = 0;
 
     for (char &groupChar : input){
         switch(groupChar){
@@ -79,15 +79,12 @@ int main(int argc, char *argv[])
                 break;
             }
             default:{
+                nonBracketCount++;
                 break;
             }
         }
     }
-    
-    bracketCount += balance;
-
-    if (bracketCount == 0)
-    {
+    if (nonBracketCount == input.size()){
         cout << "ERROR: No Bracket Characters Found! (try entering (),{},[], or <>)" << endl;
     }
     else if(balance && characters.empty()){
