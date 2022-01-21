@@ -31,49 +31,42 @@ int main(int argc, char *argv[])
         switch(groupChar){
 
             case '(':{
-                bracketCount++;
                 cout << "found a ( " << endl;
                 characters.push(groupChar);
                 break;
             }
 
             case '<':{
-                bracketCount++;
                 cout << "found a < " << endl;
                 characters.push(groupChar);
                 break;
             }
             
             case '{':{
-                bracketCount++;
                 cout << "found a { " << endl;
                 characters.push(groupChar);
                 break;
             }
 
             case '[':{
-                bracketCount++;
                 cout << "found a [ " << endl;
                 characters.push(groupChar);
                 break;
             }
 
             case ')':{
-                bracketCount++;
                 cout << "found a ) " << endl;
                 balance = calc('(');
                 break;
             }
 
             case '>':{
-                bracketCount++;
                 cout << "found a > " << endl;
                 balance = calc('<');
                 break;
             }
 
             case '}':{
-                bracketCount++;
                 cout << "found a } " << endl;
                 balance = calc('{');
                 break;
@@ -81,7 +74,6 @@ int main(int argc, char *argv[])
             }
 
             case ']':{
-                bracketCount++;
                 cout << "found a ] " << endl;
                 balance = calc('[');
                 break;
@@ -91,6 +83,9 @@ int main(int argc, char *argv[])
             }
         }
     }
+    
+    bracketCount += balance;
+
     if (bracketCount == 0)
     {
         cout << "ERROR: No Bracket Characters Found! (try entering (),{},[], or <>)" << endl;
