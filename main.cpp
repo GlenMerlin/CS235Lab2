@@ -86,6 +86,7 @@ int main(int argc, char *argv[])
     }
     if (nonBracketCount == input.size()){
         cout << "ERROR: No Bracket Characters Found! (try entering (),{},[], or <>)" << endl;
+        cout << "false" << endl;
     }
     else if(balance && characters.empty()){
         cout << "true" << endl;
