@@ -84,16 +84,15 @@ int main(int argc, char *argv[])
             }
         }
     }
-   
+    if (nonBracketCount == input.size()){
+            cout << "ERROR: No Bracket Characters Found! (try entering (),{},[], or <>)" << endl;
+            cout << "true" << endl;
+    }
     else if(balance && characters.empty()){
         cout << "true" << endl;
     }
     else
     {
-        if (nonBracketCount == input.size()){
-            cout << "ERROR: No Bracket Characters Found! (try entering (),{},[], or <>)" << endl;
-            cout << "false" << endl;
-        }
         cout << "false" << endl;
     }
 }
